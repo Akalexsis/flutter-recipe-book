@@ -1,56 +1,37 @@
 import 'package:flutter/material.dart';
 import '../models/recipe.dart';
 
-void main() {
-  runApp(const MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  // This widget is the root of your application.
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // TRY THIS: Try running your application with "flutter run". You'll see
-        // the application has a purple toolbar. Then, without quitting the app,
-        // try changing the seedColor in the colorScheme below to Colors.green
-        // and then invoke "hot reload" (save your changes or press the "hot
-        // reload" button in a Flutter-supported IDE, or press "r" if you used
-        // the command line to start the app).
-        //
-        // Notice that the counter didn't reset back to zero; the application
-        // state is not lost during the reload. To reset the state, use hot
-        // restart instead.
-        //
-        // This works for code too, not just values: Most code changes can be
-        // tested with just a hot reload.
-        colorScheme: .fromSeed(seedColor: Colors.deepPurple),
-      ),
-      // home: DetailsScreen(),
-    );
-  }
-}
-
 class DetailsScreen extends StatelessWidget {
-  final Recipe recipe;
+  // required parameter to display content to screen
+  final Recipe recipe; 
   const DetailsScreen({super.key, required this.recipe});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(recipe.name)),
+      appBar: AppBar(
+        title: Text(recipe.name)
+      ),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Hero image
-            Image.asset(recipe.imagePath, height: 220, width: double.infinity, fit: BoxFit.cover),
-            // Name, Ingredients, Instructions…
+            // Recipe image
+            Center(
+              child: Column(
+                children: [
+                  Text(recipe.name, style: TextStyle(fontSize: 30)),
+                  Image.asset(recipe.imagePath, height: 220, width: double.infinity, fit: BoxFit.cover)]
+              )
+            ),
+            SizedBox(height: 30),
+
+            Text('Ingredients: ', style: TextStyle(fontSize: 24)),
+            // ListView.builder(itemBuilder: recipe.ingredients)
+
+            SizedBox(height: 30),
+            Text('Instructions: ', style: TextStyle(fontSize: 24)),
+            Text(recipe.instructions, style: TextStyle(fontSize: 18))
           ],
         ),
       ),
