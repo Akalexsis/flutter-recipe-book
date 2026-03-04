@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:bulleted_list/bulleted_list.dart';
 import '../models/recipe.dart';
 
 class DetailsScreen extends StatelessWidget {
@@ -21,14 +22,16 @@ class DetailsScreen extends StatelessWidget {
               child: Column(
                 children: [
                   Text(recipe.name, style: TextStyle(fontSize: 30)),
-                  Image.asset(recipe.imagePath, height: 220, width: double.infinity, fit: BoxFit.cover)]
+                  Image.asset(recipe.imagePath, height: 250, width: double.infinity, fit: BoxFit.fitHeight)]
               )
             ),
             SizedBox(height: 30),
 
             Text('Ingredients: ', style: TextStyle(fontSize: 24)),
-            // ListView.builder(itemBuilder: recipe.ingredients)
-
+            BulletedList(
+              listItems: recipe.ingredients,
+              listOrder: ListOrder.ordered,
+            ),
             SizedBox(height: 30),
             Text('Instructions: ', style: TextStyle(fontSize: 24)),
             Text(recipe.instructions, style: TextStyle(fontSize: 18))
